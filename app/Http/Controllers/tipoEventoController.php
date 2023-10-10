@@ -26,10 +26,10 @@ class tipoEventoController extends Controller
      */
     public function store(Request $request)
     {
-        $tipo = New TipoEvento();
+        $tipo = new TipoEvento();
         $tipo->tipo_evento = $request->input('tipo_evento');
         $tipo->save();
-        return $tipo;
+        return response()->json('Registrado correctamente', 200);
     }
 
     /**

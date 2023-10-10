@@ -33,6 +33,10 @@ class CreateEventosTable extends Migration
             $table->string('afiche');
             $table->string('contenido');
             $table->string('invitado');
+            $table->foreignId('tipoEvento_id')
+                ->constrained('tipo_eventos')
+                ->cascadeOnUpdate()
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

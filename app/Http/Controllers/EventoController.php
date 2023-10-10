@@ -44,8 +44,9 @@ class EventoController extends Controller
         $evento->afiche = $request->input('afiche');
         $evento->contenido = $request->input('contenido');
         $evento->invitado = $request->input('invitado');
+        $evento->tipoEvento_id = $request->input('tipoEvento_id');
         $evento->save();
-        return $evento;
+        return response()->json('Registrado exitosamente', 201);
     }
 
     /**

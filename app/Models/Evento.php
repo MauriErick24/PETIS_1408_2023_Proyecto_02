@@ -26,6 +26,12 @@ class Evento extends Model
         'detalle',
         'afiche',
         'contenido',
-        'invitado'
+        'invitado',
+        'tipoEvento_id'
     ];
+
+    public function tipo_evento()
+    {
+        return $this->belongsTo(TipoEvento::class);
+    }
 }

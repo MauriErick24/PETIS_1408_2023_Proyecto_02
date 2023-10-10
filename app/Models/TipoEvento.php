@@ -11,4 +11,8 @@ class TipoEvento extends Model
     protected $fillable = [
         'tipo_evento'
     ];
+    public function eventos()
+    {
+        return $this->hasMany(Evento::class);
+    }
 }
