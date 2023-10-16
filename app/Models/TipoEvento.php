@@ -11,6 +11,10 @@ class TipoEvento extends Model
     protected $fillable = [
         'tipo_evento'
     ];
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
     public function eventos()
     {
         return $this->hasMany(Evento::class);

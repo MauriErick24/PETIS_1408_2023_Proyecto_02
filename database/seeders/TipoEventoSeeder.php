@@ -25,6 +25,9 @@ class TipoEventoSeeder extends Seeder
                 'tipo_evento' => 'Entrenamiento'
             ],
             [
+                'tipo_evento' => 'Reclutamiento'
+            ],
+            [
                 'tipo_evento' => 'Otro'
             ]
         ]);
