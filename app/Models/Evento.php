@@ -30,6 +30,11 @@ class Evento extends Model
         'tipoEvento_id'
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
     public function tipo_evento()
     {
         return $this->belongsTo(TipoEvento::class);

@@ -15,12 +15,12 @@ class CreateEventosTable extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_evento');
-            $table->date('inicio_inscripcion');
-            $table->date('fin_inscripcion');
-            $table->date('fin_evento');
+            $table->string('nombre_evento')->nullable();
+            $table->date('inicio_inscripcion')->nullable();
+            $table->date('fin_inscripcion')->nullable();
+            $table->date('fin_evento')->nullable();
             $table->string('organizador')->nullable();
-            $table->string('imagen');
+            $table->string('imagen')->nullable();
             $table->string('lugar')->nullable();
             $table->string('email')->nullable();
             $table->string('descripcion')->nullable();
