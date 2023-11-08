@@ -35,8 +35,28 @@ class Evento extends Model
         'updated_at'
     ];
 
-    public function tipo_evento()
+    public function tipoEvento()
     {
-        return $this->belongsTo(TipoEvento::class);
+        return $this->belongsTo(TipoEvento::class, 'tipoEvento_id');
+    }
+
+    public function auspiciadores()
+    {
+        return $this->belongsToMany(Auspiciador::class);
+    }
+
+    public function organizadores()
+    {
+        return $this->belongsToMany(Organizador::class);
+    }
+
+    public function premios()
+    {
+        return $this->belongsToMany(Premio::class);
+    }
+
+    public function requisitos()
+    {
+        return $this->belongsToMany(Requisito::class);
     }
 }
