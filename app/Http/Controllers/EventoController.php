@@ -103,7 +103,7 @@ class EventoController extends Controller
         //     } else {
         //         array_push($listaIds, $arr[$i]);
         //     }
-        // }
+        //}
         $evento->save();
         // $eventoId = Evento::select('id')->where('nombre_evento', 'LIKE', $evento->nombre_evento)->get();
         // $eventoId[0]->premios()->attach($listaIds);

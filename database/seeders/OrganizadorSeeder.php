@@ -41,6 +41,51 @@ class OrganizadorSeeder extends Seeder
                 'direccion' => 'puente quillacollo',
                 'imagen' => 'public/logoElfec',
                 'email' => 'elfec@gmail.com'
+            ],
+            [
+                'nombre' => 'pil',
+                'representante' => 'andina.sa',
+                'email' => 'fcyt@gmail.com',
+                'telefono' => 78121246,
+                'direccion' => 'km 12',
+                'imagen' => 'public/logoUmss',
+                'email' => 'umss@gmail.com'
+            ],
+            [
+                'nombre' => 'whatss',
+                'representante' => 'la estrella',
+                'email' => 'fcyt@gmail.com',
+                'telefono' => 78126936,
+                'direccion' => 'km 12',
+                'imagen' => 'public/logoUmss',
+                'email' => 'umss@gmail.com'
+            ],
+            [
+                'nombre' => 'powerade',
+                'representante' => 'cocacola.company',
+                'email' => 'fcyt@gmail.com',
+                'telefono' => 78121236,
+                'direccion' => 'km 12',
+                'imagen' => 'public/logoUmss',
+                'email' => 'umss@gmail.com'
+            ],
+            [
+                'nombre' => 'kingbol',
+                'representante' => 'unilever',
+                'email' => 'fcyt@gmail.com',
+                'telefono' => 78121116,
+                'direccion' => 'km 12',
+                'imagen' => 'public/logoUmss',
+                'email' => 'umss@gmail.com'
+            ],
+            [
+                'nombre' => 'pavilion',
+                'representante' => 'hp',
+                'email' => 'fcyt@gmail.com',
+                'telefono' => 78121996,
+                'direccion' => 'km 12',
+                'imagen' => 'public/logoUmss',
+                'email' => 'umss@gmail.com'
             ]
         ]);
     }
