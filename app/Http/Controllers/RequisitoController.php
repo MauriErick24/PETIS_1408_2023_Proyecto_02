@@ -25,7 +25,9 @@ class RequisitoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requisitos = new Requisito();
+        $requisitos->nombre = $request->input('nombre');
+        $requisitos->save();
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Auspiciador;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AuspiciadorController extends Controller
 {
@@ -31,7 +32,15 @@ class AuspiciadorController extends Controller
         $auspiciador->email = $request->input('email');
         $auspiciador->telefono = $request->input('telefono');
         $auspiciador->direccion = $request->input('direccion');
-        $auspiciador->logo = $request->input('logo');
+        //$primeraParte = $request->logo;
+        //$direccionIMG = file_get_contents($request->logo);
+        $direccionIMG = $request->file('logo')->store('auspiciadores', 'public');
+        // dd($direccionIMG);
+        // Storage::put('public/auspiciadores/', $primeraParte);
+        $origen = "http://127.0.0.1:8000/storage/";
+        //$linkImagen = substr($direccionIMG, 6, strlen($direccionIMG) - 1);
+        $cadenaTotal = $origen . $direccionIMG;
+        $auspiciador->logo = $cadenaTotal;
         $auspiciador->save();
         return response()->json('registrado exitosamente', 201);
     }

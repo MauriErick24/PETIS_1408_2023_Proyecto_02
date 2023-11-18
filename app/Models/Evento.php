@@ -24,15 +24,17 @@ class Evento extends Model
         'premio',
         'reglas',
         'detalle',
-        'afiche',
+        //'afiche',
         'contenido',
         'invitado',
+        'estado_evento',
         'tipoEvento_id'
     ];
 
     protected $hidden = [
         'created_at',
-        'updated_at'
+        'updated_at',
+        'pivot'
     ];
 
     public function tipoEvento()

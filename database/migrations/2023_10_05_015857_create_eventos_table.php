@@ -33,9 +33,10 @@ class CreateEventosTable extends Migration
             $table->integer('telefono')->nullable();
             $table->string('reglas')->nullable();
             $table->string('detalle')->nullable();
-            $table->string('afiche')->nullable();
+            //$table->string('afiche')->nullable();
             $table->string('contenido')->nullable();
             $table->string('invitado')->nullable();
+            $table->string('estado_evento')->nullable();
             $table->foreignId('tipoEvento_id')
                 ->constrained('tipo_eventos')
                 ->cascadeOnUpdate()

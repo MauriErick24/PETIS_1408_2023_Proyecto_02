@@ -16,11 +16,12 @@ class Auspiciador extends Model
 
     protected $hidden = [
         'updated_at',
-        'created_at'
+        'created_at',
+        'pivot'
     ];
 
     public function eventos()
     {
-        return $this->belongsToMany(Evento::class);
+        return $this->belongsToMany(Evento::class, 'evento_id');
     }
 }

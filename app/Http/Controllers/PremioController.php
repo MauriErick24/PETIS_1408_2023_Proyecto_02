@@ -25,7 +25,9 @@ class PremioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $premio = new Premio();
+        $premio->nombre = $request->input('nombre');
+        $premio->save();
     }
 
     /**

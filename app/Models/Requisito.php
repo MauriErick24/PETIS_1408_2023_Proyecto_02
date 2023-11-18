@@ -14,7 +14,8 @@ class Requisito extends Model
 
     protected $hidden = [
         'updated_at',
-        'created_at'
+        'created_at',
+        'pivot'
     ];
 
     public function eventos()

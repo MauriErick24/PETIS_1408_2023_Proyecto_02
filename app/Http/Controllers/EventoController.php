@@ -18,11 +18,19 @@ class EventoController extends Controller
      */
     public function index()
     {
-        // return Evento::join('tipo_eventos', 'tipo_eventos.id', '=', 'tipoEvento_id')
-        //     ->select('eventos.*', 'tipo_eventos.nombreTipo_evento')
-        //     ->orderBy('eventos.id', 'asc')->get();
-
-        return Evento::with('tipoEvento', 'premios')->orderBy('eventos.id')->get();
+        $evento = Evento::all();
+        foreach ($evento as $eventos) {
+            if (now()->toDateString() > $eventos->fin_actividades) {
+                $eventos->estado_evento = 'PASADO';
+                //$eventos->setAttribute('estado_evento', 'PASADO');
+            } else {
+                if (now()->toDateString() < $eventos->inicio_inscripcion) {
+                    $eventos->estado_evento = 'FUTURO';
+                }
+            }
+            $eventos->save();
+        }
+        return Evento::with('tipoEvento', 'premios', 'auspiciadores')->orderBy('eventos.id')->get();
     }
 
     /**
@@ -63,7 +71,6 @@ class EventoController extends Controller
         //     ]
         // );
 
-        // if (!$validator->fails()) {
         $evento = new Evento();
         $evento->nombre_evento = $request->input('nombre_evento');
         $evento->inicio_inscripcion = $request->input('inicio_inscripcion');
@@ -83,9 +90,10 @@ class EventoController extends Controller
         $evento->telefono = $request->input('telefono');
         $evento->reglas = $request->input('reglas');
         $evento->detalle = $request->input('detalle');
-        $evento->afiche = $request->input('afiche');
+        //$evento->afiche = $request->input('afiche');
         $evento->contenido = $request->input('contenido');
         $evento->invitado = $request->input('invitado');
+        $evento->estado_evento = $request->input('estado_evento');
         $evento->tipoEvento_id = $request->input('tipoEvento_id');
         // $arr = Arr::flatten($request->input('premios'));
         // $listaIds = array();
@@ -108,10 +116,6 @@ class EventoController extends Controller
         // $eventoId = Evento::select('id')->where('nombre_evento', 'LIKE', $evento->nombre_evento)->get();
         // $eventoId[0]->premios()->attach($listaIds);
         return response()->json('Registrado exitosamente', 201);
-        // } else {
-        // return response()->json($validator->errors(), 422);
-        //return response()->json('no se pudo registrar los datos', 422);
-        //}
     }
 
     /**
@@ -122,7 +126,7 @@ class EventoController extends Controller
      */
     public function show($id)
     {
-        //
+        return Evento::with('tipoEvento', 'premios', 'auspiciadores', 'requisitos')->findOrFail($id);
     }
 
     /**
