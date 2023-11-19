@@ -6,6 +6,7 @@ use App\Http\Controllers\OrganizadorController;
 use App\Http\Controllers\PremioController;
 use App\Http\Controllers\RequisitoController;
 use App\Http\Controllers\tipoEventoController;
+use App\Http\Controllers\UserController;
 use App\Models\Premio;
 use App\Models\Requisito;
 use Illuminate\Http\Request;
@@ -24,6 +25,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post('register', [UserController::class, 'register']);
+Route::post('login', [UserController::class, 'login']);
+
+Route::group(['middleware' => ["auth:sanctum"]], function () {
+    Route::get('showUser', [UserController::class, 'showUser']);
+    Route::get('logout', [UserController::class, 'logout']);
 });
 
 Route::resource('evento', EventoController::class);
