@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuspiciadorController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\OrganizadorController;
 use App\Http\Controllers\PremioController;
@@ -32,3 +33,18 @@ Route::resource('auspiciadores', AuspiciadorController::class);
 Route::resource('organizadores', OrganizadorController::class);
 Route::resource('premios', PremioController::class);
 Route::resource('requisitos', RequisitoController::class);
+
+
+Route::group([
+
+    'middleware' => 'api',
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'auth'
+
+], function ($router) {
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('register', 'AuthController@register');
+    Route::post('me', 'AuthController@me');
+});
