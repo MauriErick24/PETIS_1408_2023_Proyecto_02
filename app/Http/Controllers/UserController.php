@@ -23,6 +23,10 @@ class UserController extends Controller
         $user->telefono = $request->telefono;
         $user->usuario = $request->usuario;
         $user->fecha_nacimiento = $request->fecha_nacimiento;
+        $direccionIMG = $request->file('imagen')->store('users', 'public');
+        $origen = "http://127.0.0.1:8000/storage/";
+        $cadenaTotal = $origen . $direccionIMG;
+        $user->imagen = $cadenaTotal;
         $user->save();
         return response()->json([
             "status" => 200,
