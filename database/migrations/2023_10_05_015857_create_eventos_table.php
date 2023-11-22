@@ -18,21 +18,25 @@ class CreateEventosTable extends Migration
             $table->string('nombre_evento');
             $table->date('inicio_inscripcion');
             $table->date('fin_inscripcion');
-            $table->date('fin_evento');
-            $table->string('organizador');
-            $table->string('imagen');
-            $table->string('lugar');
-            $table->string('email');
-            $table->string('descripcion');
-            $table->time('hora');
-            $table->integer('telefono');
-            $table->string('requisito');
-            $table->string('premio');
-            $table->string('reglas');
-            $table->string('detalle');
-            $table->string('afiche');
-            $table->string('contenido');
-            $table->string('invitado');
+            $table->date('inicio_actividades');
+            $table->date('fin_actividades');
+            $table->date('inicio_premiacion')->nullable();
+            $table->date('fin_evento')->nullable();
+            $table->string('imagen')->nullable();
+            $table->string('lugar')->nullable();
+            $table->string('email')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->time('hora_inicio_inscripcion')->nullable();
+            $table->time('hora_fin_inscripcion')->nullable();
+            $table->time('hora_inicio_actividades')->nullable();
+            $table->time('hora_fin_actividades')->nullable();
+            $table->integer('telefono')->nullable();
+            $table->string('reglas')->nullable();
+            $table->string('detalle')->nullable();
+            //$table->string('afiche')->nullable();
+            $table->string('contenido')->nullable();
+            $table->string('invitado')->nullable();
+            $table->string('estado_evento')->nullable();
             $table->foreignId('tipoEvento_id')
                 ->constrained('tipo_eventos')
                 ->cascadeOnUpdate()

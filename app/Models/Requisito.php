@@ -5,19 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoEvento extends Model
+class Requisito extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'tipo_evento'
+        'nombre'
     ];
+
     protected $hidden = [
-        'created_at',
         'updated_at',
+        'created_at',
         'pivot'
     ];
+
     public function eventos()
     {
-        return $this->hasMany(Evento::class);
+        return $this->belongsToMany(Evento::class);
     }
 }

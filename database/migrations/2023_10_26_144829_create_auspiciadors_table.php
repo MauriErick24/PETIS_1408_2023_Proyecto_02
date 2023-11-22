@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoEventosTable extends Migration
+class CreateAuspiciadorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateTipoEventosTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_eventos', function (Blueprint $table) {
+        Schema::create('auspiciadors', function (Blueprint $table) {
             $table->id();
-            $table->string('nombreTipo_evento');
+            $table->string('nombre');
+            $table->string('empresa');
+            $table->string('email');
+            $table->integer('telefono');
+            $table->string('direccion');
+            $table->string('logo');
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ class CreateTipoEventosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_eventos');
+        Schema::dropIfExists('auspiciadors');
     }
 }
