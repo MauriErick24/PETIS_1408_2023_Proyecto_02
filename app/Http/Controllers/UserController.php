@@ -24,7 +24,7 @@ class UserController extends Controller
         $user->usuario = $request->usuario;
         $user->fecha_nacimiento = $request->fecha_nacimiento;
         $direccionIMG = $request->file('imagen')->store('users', 'public');
-        $origen = "http://127.0.0.1:8000/storage/";
+        $origen = "http://localhost:5300/public/api/imagenes/";
         $cadenaTotal = $origen . $direccionIMG;
         $user->imagen = $cadenaTotal;
         $user->save();
@@ -74,6 +74,7 @@ class UserController extends Controller
             "usuario" => auth()->user()
         ]);
     }
+
     public function logout()
     {
         auth()->user()->tokens()->delete();
