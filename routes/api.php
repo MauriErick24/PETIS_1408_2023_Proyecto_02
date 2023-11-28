@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\AficheController;
 use App\Http\Controllers\AuspiciadorController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\OrganizadorController;
@@ -7,6 +9,8 @@ use App\Http\Controllers\PremioController;
 use App\Http\Controllers\RequisitoController;
 use App\Http\Controllers\tipoEventoController;
 use App\Http\Controllers\UserController;
+use App\Models\Actividad;
+use App\Models\Auspiciador;
 use App\Models\Premio;
 use App\Models\Requisito;
 use Illuminate\Http\Request;
@@ -41,3 +45,7 @@ Route::resource('auspiciadores', AuspiciadorController::class);
 Route::resource('organizadores', OrganizadorController::class);
 Route::resource('premios', PremioController::class);
 Route::resource('requisitos', RequisitoController::class);
+Route::resource('afiches', AficheController::class);
+Route::resource('actividades', ActividadController::class);
+
+Route::post('auspiciadorEvent', [AuspiciadorController::class, 'asignarAuspiciador']);

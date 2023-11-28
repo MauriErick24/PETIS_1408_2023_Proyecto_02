@@ -61,4 +61,13 @@ class Evento extends Model
     {
         return $this->belongsToMany(Requisito::class);
     }
+
+    public function afiches()
+    {
+        return $this->belongsToMany(Afiche::class, 'afiche_evento', 'evento_id', 'afiche_id');
+    }
+    public function actividades()
+    {
+        return $this->belongsToMany(Actividad::class, 'actividad_evento', 'evento_id', 'actividad_id');
+    }
 }

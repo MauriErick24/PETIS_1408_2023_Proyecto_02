@@ -20,7 +20,7 @@ class CreateAuspiciadorsTable extends Migration
             $table->string('email');
             $table->integer('telefono');
             $table->string('direccion');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

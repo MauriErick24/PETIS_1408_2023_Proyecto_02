@@ -30,7 +30,7 @@ class EventoController extends Controller
             }
             $eventos->save();
         }
-        return Evento::with('tipoEvento', 'premios', 'auspiciadores')->orderBy('eventos.id')->get();
+        return Evento::with('tipoEvento', 'premios', 'auspiciadores', 'afiches', 'actividades')->orderBy('eventos.id')->get();
     }
 
     /**
@@ -79,7 +79,7 @@ class EventoController extends Controller
         $evento->fin_actividades = $request->input('fin_actividades');
         $evento->inicio_premiacion = $request->input('inicio_premiacion');
         $evento->fin_evento = $request->input('fin_evento');
-        $evento->imagen = $request->input('imagen');
+        $evento->imagen = 'http://127.0.0.1:8000/storage/eventos/Logo_umss.png';
         $evento->lugar = $request->input('lugar');
         $evento->email = $request->input('email');
         $evento->descripcion = $request->input('descripcion');
@@ -88,13 +88,14 @@ class EventoController extends Controller
         $evento->hora_inicio_actividades = $request->input('hora_inicio_actividades');
         $evento->hora_fin_actividades = $request->input('hora_fin_actividades');
         $evento->telefono = $request->input('telefono');
-        $evento->reglas = $request->input('reglas');
+        //$evento->reglas = $request->input('reglas');
         $evento->detalle = $request->input('detalle');
         //$evento->afiche = $request->input('afiche');
-        $evento->contenido = $request->input('contenido');
-        $evento->invitado = $request->input('invitado');
+        //$evento->contenido = $request->input('contenido');
+        //$evento->invitado = $request->input('invitado');
         $evento->estado_evento = $request->input('estado_evento');
         $evento->tipoEvento_id = $request->input('tipoEvento_id');
+
         // $arr = Arr::flatten($request->input('premios'));
         // $listaIds = array();
         // $varLimite = sizeof($arr);
@@ -113,9 +114,14 @@ class EventoController extends Controller
         //     }
         //}
         $evento->save();
+        //$ultimo = Evento::select('id')->orderBy('id', 'desc')->first();
+        $ultimo = Evento::latest('id')->first();
         // $eventoId = Evento::select('id')->where('nombre_evento', 'LIKE', $evento->nombre_evento)->get();
         // $eventoId[0]->premios()->attach($listaIds);
-        return response()->json('Registrado exitosamente', 201);
+        return response()->json([
+            "msg" => "Registrado exitosamente",
+            "id" => $ultimo->id
+        ], 201);
     }
 
     /**
@@ -126,7 +132,7 @@ class EventoController extends Controller
      */
     public function show($id)
     {
-        return Evento::with('tipoEvento', 'premios', 'auspiciadores', 'requisitos')->findOrFail($id);
+        return Evento::with('tipoEvento', 'premios', 'auspiciadores', 'requisitos', 'actividades')->find($id);
     }
 
     /**
@@ -138,7 +144,31 @@ class EventoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $evento = Evento::findOrFail($id);
+        $evento->nombre_evento = $request->input('nombre_evento');
+        $evento->inicio_inscripcion = $request->input('inicio_inscripcion');
+        $evento->fin_inscripcion = $request->input('fin_inscripcion');
+        $evento->inicio_actividades = $request->input('inicio_actividades');
+        $evento->fin_actividades = $request->input('fin_actividades');
+        $evento->inicio_premiacion = $request->input('inicio_premiacion');
+        $evento->fin_evento = $request->input('fin_evento');
+        $evento->imagen = $request->input('imagen');
+        $evento->lugar = $request->input('lugar');
+        $evento->email = $request->input('email');
+        $evento->descripcion = $request->input('descripcion');
+        $evento->hora_inicio_inscripcion = $request->input('hora_inicio_inscripcion');
+        $evento->hora_fin_inscripcion = $request->input('hora_fin_inscripcion');
+        $evento->hora_inicio_actividades = $request->input('hora_inicio_actividades');
+        $evento->hora_fin_actividades = $request->input('hora_fin_actividades');
+        $evento->telefono = $request->input('telefono');
+        $evento->reglas = $request->input('reglas');
+        $evento->detalle = $request->input('detalle');
+        $evento->contenido = $request->input('contenido');
+        $evento->invitado = $request->input('invitado');
+        $evento->estado_evento = $request->input('estado_evento');
+        $evento->tipoEvento_id = $request->input('tipoEvento_id');
+        $evento->save();
+        return response()->json("evento actualizado correctamente", 202);
     }
 
     /**

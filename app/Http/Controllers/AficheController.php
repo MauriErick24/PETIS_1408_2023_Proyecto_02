@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Afiche;
+use App\Models\Evento;
 use App\Models\Premio;
 use Illuminate\Http\Request;
 
-class PremioController extends Controller
+class AficheController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,7 @@ class PremioController extends Controller
      */
     public function index()
     {
-        return Premio::all();
+        return Afiche::all();
     }
 
     /**
@@ -25,16 +27,15 @@ class PremioController extends Controller
      */
     public function store(Request $request)
     {
-        $primera = $request->json();
-        //dd($primera);
-        $segunda = $primera->get('premios');
-        foreach ($segunda as $premio) {
-            //dd($premio);
-            $premios = new Premio();
-            $premios->nombre = $premio['nombre'];
-            $premios->save();
-        }
-        return response()->json("premio creado correctamente", 201);
+        $eventoN = Evento::find(1);
+        $eventoN->afiches()->attach($request->selectedAuspiciador);
+        // foreach ($request as $afiche) {
+        //     //dd($afiche);
+        //     $afiche = new Afiche();
+        //     $afiche->nombre = $request->nombre;
+        //     $afiche->imagen = $request->imagen;
+        //     $afiche->save();
+        //}
     }
 
     /**

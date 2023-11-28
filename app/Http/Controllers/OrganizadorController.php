@@ -31,7 +31,12 @@ class OrganizadorController extends Controller
         $organizador->email = $request->input('email');
         $organizador->telefono = $request->input('telefono');
         $organizador->direccion = $request->input('direccion');
-        $organizador->imagen = $request->input('imagen');
+        // $direccionIMG = $request->file('logo')->store('organizadores', 'public');
+        // $origen = "http://127.0.0.1:8000/storage/";
+        // $cadenaTotal = $origen . $direccionIMG;
+        // $organizador->imagen = $cadenaTotal;
+        $organizador->imagen = "este es un logo";
+        //$organizador->imagen = $request->input('imagen');
         $organizador->save();
         return response()->json('registado existosamente', 201);
     }
@@ -67,6 +72,8 @@ class OrganizadorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $organizador = Organizador::find($id);
+        $organizador->delete();
+        return response()->json("organizador elminado correctamente", 202);
     }
 }

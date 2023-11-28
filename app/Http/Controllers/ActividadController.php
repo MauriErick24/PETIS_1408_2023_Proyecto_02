@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Premio;
+use App\Models\Actividad;
 use Illuminate\Http\Request;
 
-class PremioController extends Controller
+class ActividadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class PremioController extends Controller
      */
     public function index()
     {
-        return Premio::all();
+        return Actividad::all();
     }
 
     /**
@@ -26,15 +26,15 @@ class PremioController extends Controller
     public function store(Request $request)
     {
         $primera = $request->json();
-        //dd($primera);
-        $segunda = $primera->get('premios');
-        foreach ($segunda as $premio) {
-            //dd($premio);
-            $premios = new Premio();
-            $premios->nombre = $premio['nombre'];
-            $premios->save();
+        foreach ($primera as $actividad) {
+            $actividades = new Actividad();
+            $actividades->nombre = $actividad['task'];
+            $actividades->fecha_inicio = $actividad['fecha_inicio'];
+            $actividades->fecha_fin = $actividad['fecha_fin'];
+            $actividades->save();
         }
-        return response()->json("premio creado correctamente", 201);
+
+        return response()->json('actividad creada correctamente', 201);
     }
 
     /**
