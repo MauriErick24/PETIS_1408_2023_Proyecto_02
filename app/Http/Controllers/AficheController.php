@@ -27,8 +27,16 @@ class AficheController extends Controller
      */
     public function store(Request $request)
     {
-        $eventoN = Evento::find(1);
-        $eventoN->afiches()->attach($request->selectedAuspiciador);
+        $eventoN = Evento::find($request->idActual);
+        $direccionIMG = $request->file('imagen')->store('afiches', 'public');
+        $origen = "http://127.0.0.1:8000/storage/";
+        $cadenaTotal = $origen . $direccionIMG;
+        $afiche = new Afiche();
+        $afiche->nombre = 'mi nombre';
+        $afiche->imagen = $cadenaTotal;
+        $afiche->save();
+        $ultimo = Afiche::latest('id')->first();
+        $eventoN->afiches()->attach($ultimo);
         // foreach ($request as $afiche) {
         //     //dd($afiche);
         //     $afiche = new Afiche();
@@ -69,6 +77,14 @@ class AficheController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $evento = Evento::find($id);
+        $evento->afiches()->detach();
+        return response()->json('afiche removido exitosamente', 201);
     }
+
+    // public function agregarAfiche(Request $request)
+    // {
+    //     $evento = Evento::find($request->idActual);
+    //     $evento->afiches()->attach();
+    // }
 }

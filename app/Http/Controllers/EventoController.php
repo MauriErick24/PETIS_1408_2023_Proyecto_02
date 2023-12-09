@@ -30,7 +30,7 @@ class EventoController extends Controller
             }
             $eventos->save();
         }
-        return Evento::with('tipoEvento', 'premios', 'auspiciadores', 'afiches', 'actividades')->orderBy('eventos.id')->get();
+        return Evento::with('tipoEvento', 'premios', 'auspiciadores', 'afiches', 'actividades', 'comunicados', 'organizadores')->orderBy('eventos.id')->get();
     }
 
     /**
@@ -88,11 +88,7 @@ class EventoController extends Controller
         $evento->hora_inicio_actividades = $request->input('hora_inicio_actividades');
         $evento->hora_fin_actividades = $request->input('hora_fin_actividades');
         $evento->telefono = $request->input('telefono');
-        //$evento->reglas = $request->input('reglas');
         $evento->detalle = $request->input('detalle');
-        //$evento->afiche = $request->input('afiche');
-        //$evento->contenido = $request->input('contenido');
-        //$evento->invitado = $request->input('invitado');
         $evento->estado_evento = $request->input('estado_evento');
         $evento->tipoEvento_id = $request->input('tipoEvento_id');
 
@@ -132,7 +128,7 @@ class EventoController extends Controller
      */
     public function show($id)
     {
-        return Evento::with('tipoEvento', 'premios', 'auspiciadores', 'requisitos', 'actividades')->find($id);
+        return Evento::with('tipoEvento', 'premios', 'auspiciadores', 'requisitos', 'actividades', 'comunicados', 'afiches')->find($id);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evento;
 use App\Models\Organizador;
 use Illuminate\Http\Request;
 
@@ -75,5 +76,17 @@ class OrganizadorController extends Controller
         $organizador = Organizador::find($id);
         $organizador->delete();
         return response()->json("organizador elminado correctamente", 202);
+    }
+
+    public function agregarOrganizador(Request $request)
+    {
+        $evento = Evento::find($request->idEvent);
+        $evento->organizadores()->attach($request->organizadores);
+        // $evento = Evento::find(1);
+        // $evento->organizadores()->attach([1, 2, 3]);
+        return response()->json([
+            'creado correctamente',
+            'respuesta' => $request
+        ], 201);
     }
 }

@@ -64,7 +64,7 @@ class EventoSeeder extends Seeder
                 'contenido' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
                 'invitado' => 'shrek',
                 'estado_evento' => 'EN VIVO',
-                'tipoEvento_id' => 1
+                'tipoEvento_id' => 2
             ],
             [
                 'nombre_evento' => 'eveentos 3',
@@ -87,7 +87,7 @@ class EventoSeeder extends Seeder
                 'contenido' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
                 'invitado' => 'shrek',
                 'estado_evento' => 'EN VIVO',
-                'tipoEvento_id' => 1
+                'tipoEvento_id' => 3
             ],
             [
                 'nombre_evento' => 'eveentos 4',
@@ -133,7 +133,7 @@ class EventoSeeder extends Seeder
                 'contenido' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
                 'invitado' => 'shrek',
                 'estado_evento' => 'EN VIVO',
-                'tipoEvento_id' => 1
+                'tipoEvento_id' => 2
             ],
         ]);
         $eventos = Evento::all();

@@ -69,7 +69,33 @@ class AuspiciadorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $auspiciador = Auspiciador::find($id);
+        $auspiciador->nombre = $request->input('nombre');
+        $auspiciador->empresa = $request->input('empresa');
+        $auspiciador->email = $request->input('email');
+        $auspiciador->telefono = $request->input('telefono');
+        $auspiciador->direccion = $request->input('direccion');
+        //$primeraParte = $request->logo;
+        //$direccionIMG = file_get_contents($request->logo);
+        //dd($request->logo);
+        //if ($request->hasFile($request->file)) {
+        if ($request->hasFile($request->imagen)) {
+            $direccionIMG = $request->file('imagen')->store('auspiciadores', 'public');
+        } else {
+            $direccionIMG = 'imagen';
+        }
+
+        //$path = Storage::putFile('auspiciadores', $request->file('imagen'));
+        //}
+        //dd($direccionIMG);
+        //Storage::put('public/auspiciadores/', $primeraParte);
+        $origen = "http://127.0.0.1:8000/storage/";
+        //$linkImagen = substr($direccionIMG, 6, strlen($direccionIMG) - 1);
+        $cadenaTotal = $origen . $direccionIMG;
+        $auspiciador->logo = $cadenaTotal;
+
+        $auspiciador->save();
+        return response()->json('registrado exitosamente', 201);
     }
 
     /**
@@ -80,7 +106,9 @@ class AuspiciadorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $auspiciador = Auspiciador::find($id);
+        $auspiciador->delete();
+        return response()->json('eliminado correctamente', 201);
     }
 
     public function asignarAuspiciador(Request $request)

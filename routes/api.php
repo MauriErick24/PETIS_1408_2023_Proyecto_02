@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\AficheController;
 use App\Http\Controllers\AuspiciadorController;
+use App\Http\Controllers\ComunicadoController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\OrganizadorController;
 use App\Http\Controllers\PremioController;
@@ -47,5 +48,8 @@ Route::resource('premios', PremioController::class);
 Route::resource('requisitos', RequisitoController::class);
 Route::resource('afiches', AficheController::class);
 Route::resource('actividades', ActividadController::class);
+Route::resource('comunicados', ComunicadoController::class);
 
-Route::post('auspiciadorEvent', [AuspiciadorController::class, 'asignarAuspiciador']);
+Route::get('asignarComunicado', [ComunicadoController::class, 'cantDatos']);
+Route::post('asignarAuspiciador', [AuspiciadorController::class, 'asignarAuspiciador']);
+Route::post('asignarOrganizador', [OrganizadorController::class, 'agregarOrganizador']);
