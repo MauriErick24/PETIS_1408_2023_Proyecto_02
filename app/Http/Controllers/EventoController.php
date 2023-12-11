@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Afiche;
 use App\Models\Evento;
 use App\Models\Premio;
 use ArrayObject;
@@ -30,6 +31,10 @@ class EventoController extends Controller
             }
             $eventos->save();
         }
+        // foreach ($evento as $eventoImag) {
+        //     $eventoImag->imagen=Afiche::select('imagen')->first();
+        // }
+
         return Evento::with('tipoEvento', 'premios', 'auspiciadores', 'afiches', 'actividades', 'comunicados', 'organizadores')->orderBy('eventos.id')->get();
     }
 
@@ -89,7 +94,7 @@ class EventoController extends Controller
         $evento->hora_fin_actividades = $request->input('hora_fin_actividades');
         $evento->telefono = $request->input('telefono');
         $evento->detalle = $request->input('detalle');
-        $evento->estado_evento = $request->input('estado_evento');
+        $evento->estado_evento = 'EN VIVO';
         $evento->tipoEvento_id = $request->input('tipoEvento_id');
 
         // $arr = Arr::flatten($request->input('premios'));
@@ -161,7 +166,7 @@ class EventoController extends Controller
         $evento->detalle = $request->input('detalle');
         $evento->contenido = $request->input('contenido');
         $evento->invitado = $request->input('invitado');
-        $evento->estado_evento = $request->input('estado_evento');
+        $evento->estado_evento = 'EN VIVO';
         $evento->tipoEvento_id = $request->input('tipoEvento_id');
         $evento->save();
         return response()->json("evento actualizado correctamente", 202);
@@ -178,5 +183,50 @@ class EventoController extends Controller
         $evento = Evento::findOrFail($id);
         $evento->delete();
         return response()->json('evento eliminado correctamente', 202);
+    }
+
+    public function mostrarAfiches()
+    {
+        $evento = Evento::select('eventos.id', 'nombre_evento', 'tipo_eventos.nombreTipo_evento', 'imagen')
+            ->join('tipo_eventos', 'tipo_eventos.id', '=', 'eventos.tipoEvento_id')
+            ->get();
+        return $evento;
+    }
+
+    public function cambiarImg(Request $request)
+    {
+        $direccionIMG = $request->file('imagen')->store('evento', 'public');
+        $origen = "http://127.0.0.1:8000/storage/";
+        $cadenaTotal = $origen . $direccionIMG;
+        Evento::where('id', '=', $request->idActual)
+            ->update(['imagen' => $cadenaTotal]);
+    }
+
+    public function pasados()
+    {
+        $evento = Evento::select('eventos.id', 'nombre_evento', 'tipo_eventos.nombreTipo_evento', 'imagen', 'estado_evento')
+            ->join('tipo_eventos', 'tipo_eventos.id', '=', 'eventos.tipoEvento_id')
+            ->where('estado_evento', 'LIKE', 'PASADO')
+            ->orderBy('id', 'asc')
+            ->get();
+        return $evento;
+    }
+    public function presentes()
+    {
+        $evento = Evento::select('eventos.id', 'nombre_evento', 'tipo_eventos.nombreTipo_evento', 'imagen', 'estado_evento')
+            ->join('tipo_eventos', 'tipo_eventos.id', '=', 'eventos.tipoEvento_id')
+            ->where('estado_evento', 'LIKE', 'EN VIVO')
+            ->orderBy('id', 'asc')
+            ->get();
+        return $evento;
+    }
+    public function futuros()
+    {
+        $evento = Evento::select('eventos.id', 'nombre_evento', 'tipo_eventos.nombreTipo_evento', 'imagen', 'estado_evento')
+            ->join('tipo_eventos', 'tipo_eventos.id', '=', 'eventos.tipoEvento_id')
+            ->where('estado_evento', 'LIKE', 'FUTURO')
+            ->orderBy('id', 'asc')
+            ->get();
+        return $evento;
     }
 }

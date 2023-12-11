@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evento;
 use App\Models\Premio;
 use Illuminate\Http\Request;
 
@@ -68,6 +69,22 @@ class PremioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $premio = Premio::find($id);
+        $premio->delete();
+        return response()->json('premio eliminado', 201);
+    }
+
+    public function desasignarPremio(Request $request)
+    {
+        $evento = Evento::find($request->idEvent);
+        $evento->premios()->detach($request->premios);
+        return response()->json('premio eliminado', 201);
+    }
+
+    public function cantDatos(Request $request)
+    {
+        return Evento::select('id', 'nombre_evento', 'tipoEvento_id')
+            ->with('tipoEvento')->withCount('premios')
+            ->orderBy('id', 'asc')->get();
     }
 }

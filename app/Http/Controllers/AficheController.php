@@ -78,7 +78,9 @@ class AficheController extends Controller
     public function destroy($id)
     {
         $evento = Evento::find($id);
+        $evento->imagen = "http://127.0.0.1:8000/storage/eventos/Logo_umss.png";
         $evento->afiches()->detach();
+        $evento->save();
         return response()->json('afiche removido exitosamente', 201);
     }
 

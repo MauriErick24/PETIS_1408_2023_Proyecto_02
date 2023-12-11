@@ -16,19 +16,19 @@ class TipoEventoSeeder extends Seeder
     {
         DB::table('tipo_eventos')->insert([
             [
-                'nombreTipo_evento' => 'Competencia'
+                'nombreTipo_evento' => 'COMPETENCIA'
             ],
             [
-                'nombreTipo_evento' => 'Taller'
+                'nombreTipo_evento' => 'TALLER'
             ],
             [
-                'nombreTipo_evento' => 'Entrenamiento'
+                'nombreTipo_evento' => 'ENTRENAMIENTO'
             ],
             [
-                'nombreTipo_evento' => 'Reclutamiento'
+                'nombreTipo_evento' => 'RECLUTAMIENTO'
             ],
             [
-                'nombreTipo_evento' => 'Otro'
+                'nombreTipo_evento' => 'OTROS'
             ]
         ]);
     }

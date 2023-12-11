@@ -79,11 +79,13 @@ class AuspiciadorController extends Controller
         //$direccionIMG = file_get_contents($request->logo);
         //dd($request->logo);
         //if ($request->hasFile($request->file)) {
-        if ($request->hasFile($request->imagen)) {
-            $direccionIMG = $request->file('imagen')->store('auspiciadores', 'public');
-        } else {
-            $direccionIMG = 'imagen';
-        }
+        // if ($request->hasFile($request->imagen)) {
+        //dd($request);
+        $direccionIMG = $request->file('imagen')->store('auspiciadores', 'public');
+        //dd();
+        // } else {
+        //     $direccionIMG = 'imagen';
+        // }
 
         //$path = Storage::putFile('auspiciadores', $request->file('imagen'));
         //}
