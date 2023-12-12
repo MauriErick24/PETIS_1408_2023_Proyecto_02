@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7a592752.css",
+    "main.js": "/static/js/main.001c377e.js",
+    "static/js/787.5e3bf6c8.chunk.js": "/static/js/787.5e3bf6c8.chunk.js",
+    "static/media/4.png": "/static/media/4.e2797c95e1b98bfe98d9.png",
+    "static/media/img-umss.jpg": "/static/media/img-umss.105d96c503a15c596ffa.jpg",
+    "static/media/3.png": "/static/media/3.aadc79acd09c7972f117.png",
+    "static/media/5.png": "/static/media/5.c7473c23dd4ae8e4a633.png",
+    "static/media/6.png": "/static/media/6.819be9acd74ce31af9dd.png",
+    "static/media/umss-logo.png": "/static/media/umss-logo.c1c9eda0a3221c2dc2b8.png",
+    "static/media/2.png": "/static/media/2.d6caf58c2cc213d26710.png",
+    "static/media/example-img.jpg": "/static/media/example-img.39429b7902e11f71a113.jpg",
+    "static/media/1.png": "/static/media/1.6c94309028c267dd8403.png",
+    "static/media/img-article.jpeg": "/static/media/img-article.d82fb996cdb3125c7716.jpeg",
+    "index.html": "/index.html",
+    "main.7a592752.css.map": "/static/css/main.7a592752.css.map",
+    "main.001c377e.js.map": "/static/js/main.001c377e.js.map",
+    "787.5e3bf6c8.chunk.js.map": "/static/js/787.5e3bf6c8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7a592752.css",
+    "static/js/main.001c377e.js"
+  ]
+}

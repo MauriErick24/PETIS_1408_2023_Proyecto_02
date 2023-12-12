@@ -23,7 +23,6 @@ class EventoController extends Controller
         foreach ($evento as $eventos) {
             if (now()->toDateString() > $eventos->fin_actividades) {
                 $eventos->estado_evento = 'PASADO';
-                //$eventos->setAttribute('estado_evento', 'PASADO');
             } else {
                 if (now()->toDateString() < $eventos->inicio_inscripcion) {
                     $eventos->estado_evento = 'FUTURO';
@@ -31,11 +30,17 @@ class EventoController extends Controller
             }
             $eventos->save();
         }
-        // foreach ($evento as $eventoImag) {
-        //     $eventoImag->imagen=Afiche::select('imagen')->first();
-        // }
 
-        return Evento::with('tipoEvento', 'premios', 'auspiciadores', 'afiches', 'actividades', 'comunicados', 'organizadores')->orderBy('eventos.id')->get();
+        return Evento::with(
+            'tipoEvento',
+            'premios',
+            'auspiciadores',
+            'afiches',
+            'actividades',
+            'comunicados',
+            'organizadores',
+            'participantes'
+        )->orderBy('eventos.id')->get();
     }
 
     /**
@@ -46,35 +51,6 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        // $validator = Validator::make(
-        //     $request->all(),
-        //     [
-        //         'nombre_evento' => 'required',
-        //         'inicio_inscripcion' => 'required|date',
-        //         'fin_inscripcion' => 'required|date',
-        //         // 'fin_evento' => 'required|date',
-        //         // 'organizador' => 'required',
-        //         // 'imagen' => 'required',
-        //         // 'lugar' => 'required',
-        //         // 'email' => 'required',
-        //         // 'descripcion' => 'required',
-        //         // 'hora' => 'required',
-        //         // 'telefono' => 'required|numeric',
-        //         // 'requisito' => 'required',
-        //         // 'premio' => 'required',
-        //         // 'reglas' => 'required',
-        //         // 'detalle' => 'required',
-        //         // 'afiche' => 'required',
-        //         // 'contenido' => 'required',
-        //         // 'invitado' => 'required',
-        //         'tipoEvento_id' => 'required|numeric'
-        //     ],
-        //     $messages = [
-        //         'required' => 'El campo :attribute es requerido',
-        //         'date' => 'El campo :attribute debe ser una fecha',
-        //         'numeric' => 'El campo :attribute debe contener solo numeros'
-        //     ]
-        // );
 
         $evento = new Evento();
         $evento->nombre_evento = $request->input('nombre_evento');
@@ -84,7 +60,7 @@ class EventoController extends Controller
         $evento->fin_actividades = $request->input('fin_actividades');
         $evento->inicio_premiacion = $request->input('inicio_premiacion');
         $evento->fin_evento = $request->input('fin_evento');
-        $evento->imagen = 'http://127.0.0.1:8000/storage/eventos/Logo_umss.png';
+        $evento->imagen = 'http://primesoft.tis.cs.umss.edu.bo/storage/eventos/Logo_umss.png';
         $evento->lugar = $request->input('lugar');
         $evento->email = $request->input('email');
         $evento->descripcion = $request->input('descripcion');
@@ -97,28 +73,8 @@ class EventoController extends Controller
         $evento->estado_evento = 'EN VIVO';
         $evento->tipoEvento_id = $request->input('tipoEvento_id');
 
-        // $arr = Arr::flatten($request->input('premios'));
-        // $listaIds = array();
-        // $varLimite = sizeof($arr);
-        // for ($i = 0; $i < $varLimite; $i += 2) {
-        //     if ($arr[$i] == 0) {
-        //         $premioNuevo = new Premio();
-        //         $premioNuevo->nombre = $arr[$i + 1];
-        //         $premioNuevo->save();
-        //         $idNuevo = Premio::select('id')->where('nombre', 'LIKE', $arr[$i + 1])->get();
-        //         $nuevoid = $idNuevo->toArray();
-        //         $varintermedia = array_pop($nuevoid);
-        //         $aux = array_pop($varintermedia);
-        //         array_push($listaIds, $aux);
-        //     } else {
-        //         array_push($listaIds, $arr[$i]);
-        //     }
-        //}
         $evento->save();
-        //$ultimo = Evento::select('id')->orderBy('id', 'desc')->first();
         $ultimo = Evento::latest('id')->first();
-        // $eventoId = Evento::select('id')->where('nombre_evento', 'LIKE', $evento->nombre_evento)->get();
-        // $eventoId[0]->premios()->attach($listaIds);
         return response()->json([
             "msg" => "Registrado exitosamente",
             "id" => $ultimo->id
@@ -133,7 +89,16 @@ class EventoController extends Controller
      */
     public function show($id)
     {
-        return Evento::with('tipoEvento', 'premios', 'auspiciadores', 'requisitos', 'actividades', 'comunicados', 'afiches')->find($id);
+        return Evento::with(
+            'tipoEvento',
+            'premios',
+            'auspiciadores',
+            'requisitos',
+            'actividades',
+            'comunicados',
+            'afiches',
+            'participantes'
+        )->find($id);
     }
 
     /**
@@ -196,7 +161,7 @@ class EventoController extends Controller
     public function cambiarImg(Request $request)
     {
         $direccionIMG = $request->file('imagen')->store('evento', 'public');
-        $origen = "http://127.0.0.1:8000/storage/";
+        $origen = "http://primesoft.tis.cs.umss.edu.bo/storage/";
         $cadenaTotal = $origen . $direccionIMG;
         Evento::where('id', '=', $request->idActual)
             ->update(['imagen' => $cadenaTotal]);

@@ -74,4 +74,8 @@ class Evento extends Model
     {
         return $this->hasMany(Comunicado::class);
     }
+    public function participantes()
+    {
+        return $this->belongsToMany(Participante::class, 'evento_participante', 'evento_id', 'participante_id');
+    }
 }

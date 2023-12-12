@@ -17,19 +17,20 @@ class AficheSeeder extends Seeder
         DB::table('afiches')->insert([
             [
                 'nombre' => 'burger king',
-                'imagen' => 'http://127.0.0.1:8000/storage/afiches/burger_king.jpg'
+                'imagen' => 'http://primesoft.tis.cs.umss.edu.bo/storage/afiches/burger_king.jpg'
             ],
             [
                 'nombre' => 'pepsi',
-                'imagen' => 'http://127.0.0.1:8000/storage/afiches/pepsi.jpg'
+                'imagen' => 'http://primesoft.tis.cs.umss.edu.bo/storage/afiches/pepsi.jpg'
             ],
             [
+
                 'nombre' => 'spotify',
-                'imagen' => 'http://127.0.0.1:8000/storage/afiches/spotify.jpg'
+                'imagen' => 'http://primesoft.tis.cs.umss.edu.bo/storage/afiches/spotify.jpg'
             ],
             [
                 'nombre' => 'unilever',
-                'imagen' => 'http://127.0.0.1:8000/storage/afiches/unilever.jpg'
+                'imagen' => 'http://primesoft.tis.cs.umss.edu.bo/storage/afiches/unilever.jpg'
             ]
         ]);
     }

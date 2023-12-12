@@ -41,7 +41,8 @@ class AuspiciadorController extends Controller
         //}
         //dd($direccionIMG);
         //Storage::put('public/auspiciadores/', $primeraParte);
-        $origen = "http://127.0.0.1:8000/storage/";
+        $origen = "http://primesoft.tis.cs.umss.edu.bo/storage/";
+        //$origen = Storage::url($direccionIMG);
         //$linkImagen = substr($direccionIMG, 6, strlen($direccionIMG) - 1);
         $cadenaTotal = $origen . $direccionIMG;
         $auspiciador->logo = $cadenaTotal;
@@ -82,6 +83,7 @@ class AuspiciadorController extends Controller
         // if ($request->hasFile($request->imagen)) {
         //dd($request);
         $direccionIMG = $request->file('imagen')->store('auspiciadores', 'public');
+        //$origen = Storage::url($direccionIMG);
         //dd();
         // } else {
         //     $direccionIMG = 'imagen';
@@ -91,7 +93,7 @@ class AuspiciadorController extends Controller
         //}
         //dd($direccionIMG);
         //Storage::put('public/auspiciadores/', $primeraParte);
-        $origen = "http://127.0.0.1:8000/storage/";
+        $origen = "http://primesoft.tis.cs.umss.edu.bo/storage/";
         //$linkImagen = substr($direccionIMG, 6, strlen($direccionIMG) - 1);
         $cadenaTotal = $origen . $direccionIMG;
         $auspiciador->logo = $cadenaTotal;

@@ -6,6 +6,7 @@ use App\Models\Afiche;
 use App\Models\Evento;
 use App\Models\Premio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AficheController extends Controller
 {
@@ -29,7 +30,9 @@ class AficheController extends Controller
     {
         $eventoN = Evento::find($request->idActual);
         $direccionIMG = $request->file('imagen')->store('afiches', 'public');
-        $origen = "http://127.0.0.1:8000/storage/";
+        //$origen = config('app.url');
+        //$origen = Storage::url($direccionIMG);
+        $origen = "http://primesoft.tis.cs.umss.edu.bo/storage/";
         $cadenaTotal = $origen . $direccionIMG;
         $afiche = new Afiche();
         $afiche->nombre = 'mi nombre';
@@ -78,7 +81,7 @@ class AficheController extends Controller
     public function destroy($id)
     {
         $evento = Evento::find($id);
-        $evento->imagen = "http://127.0.0.1:8000/storage/eventos/Logo_umss.png";
+        $evento->imagen = "http://primesoft.tis.cs.umss.edu.bo/storage/eventos/Logo_umss.png";
         $evento->afiches()->detach();
         $evento->save();
         return response()->json('afiche removido exitosamente', 201);

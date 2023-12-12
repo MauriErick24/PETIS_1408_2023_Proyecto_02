@@ -32,12 +32,7 @@ class OrganizadorController extends Controller
         $organizador->email = $request->input('email');
         $organizador->telefono = $request->input('telefono');
         $organizador->direccion = $request->input('direccion');
-        // $direccionIMG = $request->file('logo')->store('organizadores', 'public');
-        // $origen = "http://127.0.0.1:8000/storage/";
-        // $cadenaTotal = $origen . $direccionIMG;
-        // $organizador->imagen = $cadenaTotal;
         $organizador->imagen = "este es un logo";
-        //$organizador->imagen = $request->input('imagen');
         $organizador->save();
         return response()->json('registado existosamente', 201);
     }
@@ -82,8 +77,6 @@ class OrganizadorController extends Controller
     {
         $evento = Evento::find($request->idEvent);
         $evento->organizadores()->attach($request->organizadores);
-        // $evento = Evento::find(1);
-        // $evento->organizadores()->attach([1, 2, 3]);
         return response()->json([
             'creado correctamente',
             'respuesta' => $request

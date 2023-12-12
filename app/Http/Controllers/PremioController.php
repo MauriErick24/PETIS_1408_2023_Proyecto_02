@@ -27,10 +27,8 @@ class PremioController extends Controller
     public function store(Request $request)
     {
         $primera = $request->json();
-        //dd($primera);
         $segunda = $primera->get('premios');
         foreach ($segunda as $premio) {
-            //dd($premio);
             $premios = new Premio();
             $premios->nombre = $premio['nombre'];
             $premios->save();

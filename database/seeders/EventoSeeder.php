@@ -120,7 +120,7 @@ class EventoSeeder extends Seeder
                 'fin_actividades' => '2022-11-20',
                 'inicio_premiacion' => '2024-12-1',
                 'fin_evento' => '2023-12-1',
-                'imagen' => 'http://127.0.0.1:8000/storage/eventos/Logo_umss.png',
+                'imagen' => 'http://primesoft.tis.cs.umss.edu.bo/storage/eventos/Logo_umss.png',
                 'lugar' => 'coña coña',
                 'email' => 'preten@gmail.com',
                 'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',

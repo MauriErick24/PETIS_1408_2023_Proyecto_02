@@ -21,7 +21,7 @@ class AuspiciadorSeeder extends Seeder
                 'email' => 'coca@gmail.com',
                 'telefono' => 78327438,
                 'direccion' => 'kom8a',
-                'logo'  =>  'http://127.0.0.1:8000/storage/auspiciadores/cocacola.png'
+                'logo'  =>  'http://primesoft.tis.cs.umss.edu.bo/storage/auspiciadores/cocacola.png'
             ],
             [
                 'nombre' => 'pilAndina',
@@ -29,7 +29,7 @@ class AuspiciadorSeeder extends Seeder
                 'email' => 'coca@gmail.com',
                 'telefono' => 78327438,
                 'direccion' => 'kom8a',
-                'logo'  =>  'http://127.0.0.1:8000/storage/auspiciadores/pilandina.jpg'
+                'logo'  =>  'http://primesoft.tis.cs.umss.edu.bo/storage/auspiciadores/pilandina.jpg'
             ],
             [
                 'nombre' => 'coolerMaster',
@@ -37,7 +37,7 @@ class AuspiciadorSeeder extends Seeder
                 'email' => 'coca@gmail.com',
                 'telefono' => 78327438,
                 'direccion' => 'kom8a',
-                'logo'  =>  'http://127.0.0.1:8000/storage/auspiciadores/cooler_master.png'
+                'logo'  =>  'http://primesoft.tis.cs.umss.edu.bo/storage/auspiciadores/cooler_master.png'
             ]
         ]);
     }
