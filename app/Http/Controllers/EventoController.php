@@ -35,7 +35,15 @@ class EventoController extends Controller
         //     $eventoImag->imagen=Afiche::select('imagen')->first();
         // }
 
-        return Evento::with('tipoEvento', 'premios', 'auspiciadores', 'afiches', 'actividades', 'comunicados', 'organizadores')->orderBy('eventos.id')->get();
+        return Evento::with(
+            'tipoEvento',
+            'premios',
+            'auspiciadores',
+            'afiches',
+            'actividades',
+            'comunicados',
+            'organizadores'
+        )->orderBy('eventos.id')->get();
     }
 
     /**
@@ -195,11 +203,11 @@ class EventoController extends Controller
 
     public function cambiarImg(Request $request)
     {
-        $direccionIMG = $request->file('imagen')->store('evento', 'public');
-        $origen = "http://127.0.0.1:8000/storage/";
-        $cadenaTotal = $origen . $direccionIMG;
+        //$direccionIMG = $request->file('imagen')->store('evento', 'public');
+        //$origen = "http://127.0.0.1:8000/storage/";
+        //$cadenaTotal = $origen . $direccionIMG;
         Evento::where('id', '=', $request->idActual)
-            ->update(['imagen' => $cadenaTotal]);
+            ->update(['imagen' => $request->URLimagen]);
     }
 
     public function pasados()

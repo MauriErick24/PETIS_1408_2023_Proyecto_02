@@ -21,23 +21,23 @@ class AuspiciadorSeeder extends Seeder
                 'email' => 'coca@gmail.com',
                 'telefono' => 78327438,
                 'direccion' => 'kom8a',
-                'logo'  =>  'http://127.0.0.1:8000/storage/auspiciadores/cocacola.png'
+                'logo'  =>  'https://firebasestorage.googleapis.com/v0/b/backend-tis.appspot.com/o/auspiciadores%2Fcocacola.png?alt=media&token=f5c5413e-6ddb-45b6-9aed-de93a3d782e9'
             ],
             [
                 'nombre' => 'pilAndina',
-                'empresa' => 'embol.sa',
+                'empresa' => 'gloria.sa',
                 'email' => 'coca@gmail.com',
                 'telefono' => 78327438,
                 'direccion' => 'kom8a',
-                'logo'  =>  'http://127.0.0.1:8000/storage/auspiciadores/pilandina.jpg'
+                'logo'  =>  'https://firebasestorage.googleapis.com/v0/b/backend-tis.appspot.com/o/auspiciadores%2Fpilandina.jpg?alt=media&token=2e51d6ae-b5fa-487f-a1ea-1f40504b483b'
             ],
             [
                 'nombre' => 'coolerMaster',
-                'empresa' => 'embol.sa',
+                'empresa' => 'cooler.sa',
                 'email' => 'coca@gmail.com',
                 'telefono' => 78327438,
                 'direccion' => 'kom8a',
-                'logo'  =>  'http://127.0.0.1:8000/storage/auspiciadores/cooler_master.png'
+                'logo'  =>  'https://firebasestorage.googleapis.com/v0/b/backend-tis.appspot.com/o/auspiciadores%2Fcooler_master.png?alt=media&token=e59c2139-1736-40af-8ab5-137d46c75848'
             ]
         ]);
     }

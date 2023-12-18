@@ -49,7 +49,7 @@ class Evento extends Model
 
     public function organizadores()
     {
-        return $this->belongsToMany(Organizador::class);
+        return $this->belongsToMany(Organizador::class, 'evento_organizador', 'evento_id', 'organizador_id');
     }
 
     public function premios()

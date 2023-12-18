@@ -74,6 +74,13 @@ class PremioController extends Controller
         return response()->json('premio eliminado', 201);
     }
 
+    public function asignarPremio(Request $request)
+    {
+        //$evento = Evento::findOrFail($request->idEvento)->first();
+        $evento = Evento::find($request->idEvent);
+        $evento->premios()->attach($request->premios);
+    }
+
     public function desasignarPremio(Request $request)
     {
         $evento = Evento::find($request->idEvent);
@@ -81,10 +88,37 @@ class PremioController extends Controller
         return response()->json('premio eliminado', 201);
     }
 
-    public function cantDatos(Request $request)
+    public function cantDatos()
     {
         return Evento::select('id', 'nombre_evento', 'tipoEvento_id')
-            ->with('tipoEvento')->withCount('premios')
+            ->with('tipoEvento', 'premios')
+            ->withCount('premios')
             ->orderBy('id', 'asc')->get();
+    }
+
+    public function distintos($id)
+    {
+        $evento = Evento::select('premio_id')
+            ->from('evento_premio')
+            ->where('evento_id', $id)->get();
+
+
+        $organizadoresllenos = $evento->pluck('premio_id');
+
+        return Premio::select('id', 'nombre')
+            ->whereIn('id', $organizadoresllenos)->get();
+    }
+
+    public function distintosP($id)
+    {
+        $evento = Evento::select('premio_id')
+            ->from('evento_premio')
+            ->where('evento_id', $id)->get();
+
+
+        $organizadoresllenos = $evento->pluck('premio_id');
+
+        return Premio::select('id', 'nombre')
+            ->whereNotIn('id', $organizadoresllenos)->get();
     }
 }

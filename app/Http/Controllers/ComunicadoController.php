@@ -75,6 +75,6 @@ class ComunicadoController extends Controller
 
     public function cantDatos(Request $request)
     {
-        return Evento::select('id', 'nombre_evento', 'tipoEvento_id')->with('tipoEvento')->withCount('comunicados')->get();
+        return Evento::select('id', 'nombre_evento', 'tipoEvento_id')->with('tipoEvento')->withCount('comunicados')->orderBy('id')->get();
     }
 }

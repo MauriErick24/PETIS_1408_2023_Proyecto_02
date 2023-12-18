@@ -120,7 +120,7 @@ class EventoSeeder extends Seeder
                 'fin_actividades' => '2022-11-20',
                 'inicio_premiacion' => '2024-12-1',
                 'fin_evento' => '2023-12-1',
-                'imagen' => 'http://127.0.0.1:8000/storage/eventos/Logo_umss.png',
+                'imagen' => 'https://firebasestorage.googleapis.com/v0/b/backend-tis.appspot.com/o/auspiciadores%2FpQocKCjf4mL1DACr5FASlYmPMr0rWi6urk2hmxcr.png?alt=media&token=098a22b1-94e7-4b7d-befc-0b6d3e149712',
                 'lugar' => 'coña coña',
                 'email' => 'preten@gmail.com',
                 'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
@@ -142,12 +142,18 @@ class EventoSeeder extends Seeder
                 $evento->auspiciadores()->attach($auspiciador);
             }
         }
-        $premios = Premio::all();
-        foreach ($eventos as $evento) {
-            foreach ($premios as $premio) {
-                $evento->premios()->attach($premio);
-            }
+
+        for ($i = 1; $i < 4; $i++) {
+            $event = Evento::find($i);
+            $event->premios()->attach([1, 2, 3]);
         }
+
+        // $premios = Premio::all();
+        // foreach ($eventos as $evento) {
+        //     foreach ($premios as $premio) {
+        //         $evento->premios()->attach($premio);
+        //     }
+        // }
         $actividades = Actividad::all();
         foreach ($eventos as $evento) {
             foreach ($actividades as $actividad) {

@@ -16,6 +16,10 @@ class OrganizadorController extends Controller
     public function index()
     {
         return Organizador::orderBy('id', 'asc')->get();
+        // return Evento::select('id', 'nombre_evento', 'tipoEvento_id')
+        //     ->with('tipoEvento', 'organizadores')
+        //     ->withCount('organizadores')
+        //     ->orderBy('id')->get();
     }
 
     /**
@@ -50,7 +54,14 @@ class OrganizadorController extends Controller
      */
     public function show($id)
     {
-        //
+        $evento = Evento::where('id', '=', $id)->with('organizadores')->get();
+        dd($evento);
+        if ($evento->organizadores()) {
+            $mensaje = $evento->organizadores;
+        } else {
+            $mensaje = "no hay organizadores en este evento";
+        }
+        return $mensaje;
     }
 
     /**
@@ -88,5 +99,25 @@ class OrganizadorController extends Controller
             'creado correctamente',
             'respuesta' => $request
         ], 201);
+    }
+
+    public function cantDatos()
+    {
+        return Evento::select('id', 'nombre_evento', 'tipoEvento_id')
+            ->with('tipoEvento', 'organizadores')
+            ->withCount('organizadores')
+            ->orderBy('id')->get();
+    }
+
+    public function distintos($id)
+    {
+        $evento = Evento::select('organizador_id')
+            ->from('evento_organizador')
+            ->where('evento_id', $id)->get();
+
+        $organizadoresllenos = $evento->pluck('organizador_id');
+
+        return Organizador::select('id', 'nombre', 'representante')
+            ->whereNotIn('id', $organizadoresllenos)->get();
     }
 }

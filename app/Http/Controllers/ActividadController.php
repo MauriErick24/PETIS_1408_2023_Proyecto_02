@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Actividad;
+use App\Models\Evento;
 use Illuminate\Http\Request;
 
 class ActividadController extends Controller
@@ -70,4 +71,41 @@ class ActividadController extends Controller
     {
         //
     }
+
+    public function asignarActividades(Request $request)
+    {
+        //$evento = Evento::findOrFail($request->idEvento)->first();
+
+        $actividad = new Actividad();
+        $actividad->nombre = $request->task;
+        $actividad->fecha_inicio = $request->fecha_inicio;
+        $actividad->fecha_fin = $request->fecha_fin;
+        $actividad->save();
+        $ultimo = Actividad::latest('id')->first();
+
+        $evento = Evento::find($request->idActual);
+        $evento->actividades()->attach($ultimo);
+        return response()->json('actividad asignada correctamente', 201);
+    }
+
+    public function cantDatos()
+    {
+        return Evento::select('id', 'nombre_evento', 'tipoEvento_id')
+            ->with('tipoEvento', 'actividades')
+            ->withCount('actividades')
+            ->orderBy('id', 'asc')->get();
+    }
+
+    // public function distintos($id)
+    // {
+    //     $evento = Evento::select('auspiciador_id')
+    //         ->from('auspiciador_evento')
+    //         ->where('evento_id', $id)->get();
+
+
+    //     $organizadoresllenos = $evento->pluck('auspiciador_id');
+
+    //     return Actividad::select('id', 'nombre', 'empresa')
+    //         ->whereIn('id', $organizadoresllenos)->get();
+    // }
 }

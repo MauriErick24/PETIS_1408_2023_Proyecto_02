@@ -23,6 +23,18 @@ class PremioSeeder extends Seeder
             ],
             [
                 'nombre' => 'medalla de plata'
+            ],
+            [
+                'nombre' => 'medalla de bronce'
+            ],
+            [
+                'nombre' => '2000bs'
+            ],
+            [
+                'nombre' => 'medalla de platino'
+            ],
+            [
+                'nombre' => '3000bs'
             ]
         ]);
     }

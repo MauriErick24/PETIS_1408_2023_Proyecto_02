@@ -113,10 +113,51 @@ class AuspiciadorController extends Controller
         return response()->json('eliminado correctamente', 201);
     }
 
+    public function desAsignarAuspiciador(Request $request)
+    {
+        $evento = Evento::find($request->idEvent);
+        $evento->auspiciadores()->detach($request->auspiciadores);
+        return response()->json('premio eliminado', 201);
+    }
+
     public function asignarAuspiciador(Request $request)
     {
         //$evento = Evento::findOrFail($request->idEvento)->first();
-        $evento = Evento::find($request->idEvento);
-        $evento->auspiciadores()->attach($request->selectedAuspiciador);
+        $evento = Evento::find($request->idEvent);
+        $evento->auspiciadores()->attach($request->auspiciadores);
+    }
+
+    public function cantDatos()
+    {
+        return Evento::select('id', 'nombre_evento', 'tipoEvento_id')
+            ->with('tipoEvento', 'auspiciadores')
+            ->withCount('auspiciadores')
+            ->orderBy('id', 'asc')->get();
+    }
+
+    public function distintos($id)
+    {
+        $evento = Evento::select('auspiciador_id')
+            ->from('auspiciador_evento')
+            ->where('evento_id', $id)->get();
+
+
+        $organizadoresllenos = $evento->pluck('auspiciador_id');
+
+        return Auspiciador::select('id', 'nombre', 'empresa')
+            ->whereIn('id', $organizadoresllenos)->get();
+    }
+
+    public function distintosAgregar($id)
+    {
+        $evento = Evento::select('auspiciador_id')
+            ->from('auspiciador_evento')
+            ->where('evento_id', $id)->get();
+
+
+        $organizadoresllenos = $evento->pluck('auspiciador_id');
+
+        return Auspiciador::select('id', 'nombre', 'empresa')
+            ->whereNotIn('id', $organizadoresllenos)->get();
     }
 }
