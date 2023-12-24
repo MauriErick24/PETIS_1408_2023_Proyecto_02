@@ -81,7 +81,7 @@ class AuspiciadorController extends Controller
         //if ($request->hasFile($request->file)) {
         // if ($request->hasFile($request->imagen)) {
         //dd($request);
-        $direccionIMG = $request->file('imagen')->store('auspiciadores', 'public');
+        //$direccionIMG = $request->file('imagen')->store('auspiciadores', 'public');
         //dd();
         // } else {
         //     $direccionIMG = 'imagen';
@@ -91,10 +91,11 @@ class AuspiciadorController extends Controller
         //}
         //dd($direccionIMG);
         //Storage::put('public/auspiciadores/', $primeraParte);
-        $origen = "http://127.0.0.1:8000/storage/";
+        //$origen = "http://127.0.0.1:8000/storage/";
         //$linkImagen = substr($direccionIMG, 6, strlen($direccionIMG) - 1);
-        $cadenaTotal = $origen . $direccionIMG;
-        $auspiciador->logo = $cadenaTotal;
+        //$cadenaTotal = $origen . $direccionIMG;
+        //$auspiciador->logo = $cadenaTotal;
+        $auspiciador->logo = $request->imagen;
 
         $auspiciador->save();
         return response()->json('registrado exitosamente', 201);
